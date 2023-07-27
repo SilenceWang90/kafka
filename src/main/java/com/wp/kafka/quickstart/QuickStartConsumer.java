@@ -42,6 +42,7 @@ public class QuickStartConsumer {
 
         /** 3、订阅主题，接收消息 **/
         consumer.subscribe(Collections.singletonList("test-quickstart"));
+        log.info("quickstart consumer started");
 
         /** 4、采用主动拉取消息的方式消费数据 **/
         while (true) {
@@ -63,7 +64,6 @@ public class QuickStartConsumer {
                     long commitOffset = offset + 1;
                     log.info("获取实际消息：{}，消息的offset：{}，提交offset：{}", value, offset, commitOffset);
                 });
-
             });
         }
     }
