@@ -31,7 +31,7 @@ public class QuickStartConsumer {
         // （3）重要属性：消费者订阅组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "quickstart-group");
         // （4）连接超时配置，单位是毫秒
-        properties.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 5000);
+        properties.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 6000);
         // （5）消费者提交offset：自动提交以及手动提交，true是自动提交，false是手动提交
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         // （6）提交时机：每隔5秒提交一次
