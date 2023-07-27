@@ -35,7 +35,6 @@ public class QuickStartProducer {
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>("test-quickstart", producer.toString());
 
         /** 4、发送消息 **/
-
-
+        producer.send(producerRecord);
     }
 }
