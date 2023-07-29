@@ -32,7 +32,7 @@ public class QuickStartProducer {
         User user = new User("001", "王泽霖");
         // ProducerRecord是Kafka消息体，将要发送的消息放入ProducerRecord
         // 构造函数要放入topic以及消息本身
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("test-quickstart", producer.toString());
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("test-quickstart", user.toString());
 
         /** 4、发送消息 **/
         producer.send(producerRecord);
