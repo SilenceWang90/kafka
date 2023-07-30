@@ -38,7 +38,7 @@ public class QuickStartConsumer {
         properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
 
         /** 2、创建消费者对象 **/
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
+        KafkaConsumer<String, User> consumer = new KafkaConsumer<>(properties);
 
         /** 3、订阅主题，接收消息 **/
         consumer.subscribe(Collections.singletonList("test-quickstart"));
@@ -47,17 +47,17 @@ public class QuickStartConsumer {
         /** 4、采用主动拉取消息的方式消费数据 **/
         while (true) {
             // 等待多久拉取一次主题中的消息
-            ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(1000));
+            ConsumerRecords<String, User> consumerRecords = consumer.poll(Duration.ofMillis(1000));
             // 消息存储在partition中，一个topic可以有多个partition，因此遍历所有的partion将topic中对应的所有消息全部获取到
             consumerRecords.partitions().forEach(partition -> {
                 // 从partition中获取kafka消息
-                List<ConsumerRecord<String, String>> partitionRecords = consumerRecords.records(partition);
+                List<ConsumerRecord<String, User>> partitionRecords = consumerRecords.records(partition);
                 log.info("获取消息的topic：{}，分区号：{}，消息总数：{}", partition.topic(), partition.partition(), partitionRecords.size());
                 partitionRecords.forEach(message -> {
                     // kafka设置的消息的key
                     String key = message.key();
                     // 消息本身
-                    String value = message.value();
+                    User value = message.value();
                     // 获取的消息在当前partition的偏移量
                     long offset = message.offset();
                     // 手动提交偏移量的话，offset加一处理
