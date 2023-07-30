@@ -26,13 +26,13 @@ public class QuickStartProducer {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         /** 2、创建kafka生产者对象，传递properties属性参数集合 **/
-        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+        KafkaProducer<String, User> producer = new KafkaProducer<>(properties);
 
         /** 3、构造消息内容 **/
         User user = new User("001", "王泽霖");
         // ProducerRecord是Kafka消息体，将要发送的消息放入ProducerRecord
         // 构造函数要放入topic以及消息本身
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("test-quickstart", user.toString());
+        ProducerRecord<String, User> producerRecord = new ProducerRecord<>("test-quickstart", user);
 
         /** 4、发送消息 **/
         producer.send(producerRecord);
