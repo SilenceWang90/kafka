@@ -35,7 +35,9 @@ public class CustomConsumerInterceptor implements ConsumerInterceptor<String, St
      */
     @Override
     public void onCommit(Map<TopicPartition, OffsetAndMetadata> offsets) {
-        /** 每次提交的时候都会被调用一次，无论是自动还是手动。自动提交如果设置每隔多久自动提交一次的话此方法会被不断重复执行~相关参数如下：**/
+        /** 每次提交的时候都会被调用一次，无论是自动还是手动。
+         * 手动提交：KafkaConsumer.commitSync()/KafkaConsumer.commitAsync()等方法即可。注意：手动提交是将此次poll()的全部数据中offset最大的偏移量进行提交！！！
+         * 自动提交：如果设置每隔多久自动提交一次的话此方法会被不断重复执行~相关参数如下：**/
         // 消费者提交offset：自动提交以及手动提交，true是自动提交，false是手动提交
         // properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         // 提交时机：每隔5秒提交一次
