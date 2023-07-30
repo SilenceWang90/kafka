@@ -1,8 +1,10 @@
 package com.wp.kafka.quickstart;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
@@ -12,6 +14,7 @@ import java.util.Properties;
  * @Author admin
  * @Date 2023/7/26 13:38
  */
+@Slf4j
 public class QuickStartProducer {
     public static void main(String[] args) {
         /** 1、配置生产者启动的关键参数 **/
@@ -35,6 +38,12 @@ public class QuickStartProducer {
         ProducerRecord<String, User> producerRecord = new ProducerRecord<>("topic-normal", user);
 
         /** 4、发送消息 **/
-        producer.send(producerRecord);
+        producer.send(producerRecord,(RecordMetadata metadata, Exception exception)->{
+            if(exception!=null){
+                exception.printStackTrace();
+                return;
+            }
+            log.info("分区为:{},时间戳为:{},偏移量为:{}",metadata.partition(),metadata.timestamp(),metadata.offset());
+        });
     }
 }
