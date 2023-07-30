@@ -19,7 +19,7 @@ public class QuickStartProducer {
         // （1）链接kafka集群的服务列表，如果有多个则逗号分隔
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
         // （2）标记kafka client的ID。用于区分多个连接到kafka的client唯一标识
-        properties.put(ProducerConfig.CLIENT_ID_CONFIG, "quickstart-producer");
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, "topic-normal-producer");
         // （3）发送消息的序列化处理。KEY和VALUE都要做序列化处理，key用于消息分区(partition)，value是消息本身
         // Kafka Broker只能处理二进制数据，因此必须做序列化处理
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
@@ -32,7 +32,7 @@ public class QuickStartProducer {
         User user = new User("001", "王泽霖");
         // ProducerRecord是Kafka消息体，将要发送的消息放入ProducerRecord
         // 构造函数要放入topic以及消息本身
-        ProducerRecord<String, User> producerRecord = new ProducerRecord<>("test-quickstart", user);
+        ProducerRecord<String, User> producerRecord = new ProducerRecord<>("topic-normal", user);
 
         /** 4、发送消息 **/
         producer.send(producerRecord);
