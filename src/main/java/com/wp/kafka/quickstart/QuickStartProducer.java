@@ -38,12 +38,12 @@ public class QuickStartProducer {
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>("topic-normal", user.toString());
 
         /** 4、发送消息 **/
-        producer.send(producerRecord,(RecordMetadata metadata, Exception exception)->{
-            if(exception!=null){
+        producer.send(producerRecord, (RecordMetadata metadata, Exception exception) -> {
+            if (exception != null) {
                 exception.printStackTrace();
                 return;
             }
-            log.info("分区为:{},时间戳为:{},偏移量为:{}",metadata.partition(),metadata.timestamp(),metadata.offset());
+            log.info("分区为:{},时间戳为:{},偏移量为:{}", metadata.partition(), metadata.timestamp(), metadata.offset());
         });
     }
 }
