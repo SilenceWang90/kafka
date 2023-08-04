@@ -21,5 +21,19 @@ spring:
       # acks=0：生产者发送消息后，不需要等待任何broker的响应。可靠性最低，一般用于写日志的场景。
       # acks=-1或all：生产者发送消息后，需要等待ISR中的所有副本都成功写入消息后才能收到broker的响应信息。可靠性非常高.
       acks: 1
+    # 2、consumer
+    consumer:
+      # 2.1、关闭自动commit
+      enable-auto-commit: false
+      # 2.2、从最近一次提交的offset开始拉取消息
+      auto-offset-reset: earliest
+      # 2.3、反序列化
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      # 2.4、启用手动签收
+      ack-mode: manual
+      # 2.5、listener允许几个线程并行
+      concurrency: 5
 server:
   port: 8080
