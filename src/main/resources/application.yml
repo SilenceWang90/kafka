@@ -4,7 +4,7 @@ spring:
   # Spring整合Kafka
   kafka:
     # kafka服务地址，多个逗号分隔
-    bootstrap-servers: 127.0.0.1:9093
+    bootstrap-servers: 127.0.0.1:9091
     # 1、producer配置
     producer:
       # 1.1、发送消息失败重试次数
